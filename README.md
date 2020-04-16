@@ -1,5 +1,7 @@
 # Flink Composer API
 
+### Pull the repository and run docker-compose
+
 ## Usage
 
 All responses will have the form
