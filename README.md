@@ -4,22 +4,16 @@
 
 ## Usage
 
-All responses will have the form
+**2 endpoints:**
 
-```json
-{
-    "data": "Mixed type holding the content of the response",
-    "message": "Description of what happened"
-}
-```
+- `/jobs` GET and POST
+- `/jobs/<identifier>` GET and DELETE 
 
-Subsequent response definitions will only detail the expected value of the `data field`
-
-### List all devices
+### List all Jobs
 
 **Definition**
 
-`GET /devices`
+`GET /jobs`
 
 **Response**
 
@@ -27,52 +21,69 @@ Subsequent response definitions will only detail the expected value of the `data
 
 ```json
 [
-    {
-        "identifier": "floor-lamp",
-        "name": "Floor Lamp",
-        "device_type": "switch",
-        "controller_gateway": "192.1.68.0.2"
-    },
-    {
-        "identifier": "samsung-tv",
-        "name": "Living Room TV",
-        "device_type": "tv",
-        "controller_gateway": "192.168.0.9"
-    }
+  {
+    "jobname": "A",
+    "version": 1,
+    "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
+    "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
+    "location": "http://localhost:8081",
+    "mqtt": "tcp://localhost:1883",
+    "source": "T-1",
+    "sink": "T-2",
+    "class": "flinkpackage.FlowCheck"
+  },
+  {
+    "jobname": "B",
+    "version": 1,
+    "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
+    "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
+    "location": "http://localhost:8081",
+    "mqtt": "tcp://localhost:1883",
+    "source": "T-2",
+    "sink": "T-N",
+    "class": "flinkpackage.FlowCheck"
+  }
 ]
 ```
 
-### Registering a new device
+### Registering a new job
 
 **Definition**
 
-`POST /devices`
+`POST /jobs`
 
 **Arguments**
 
-- `"identifier":string` a globally unique identifier for this device
-- `"name":string` a friendly name for this device
-- `"device_type":string` the type of the device as understood by the client
-- `"controller_gateway":string` the IP address of the device's controller
-
-If a device with the given identifier already exists, the existing device will be overwritten.
+- `"job_name":string` unique name for this job
+- `"version":string` job version
+- `"flink_address":string` the IP address of the Flink instance
+- `"mqtt_address":string` the IP address of main MQTT broker
+- `"source_topic":string` subscriber topic of the job
+- `"sink_topic":string` publisher topic of the job
+- `"entry_class":string` entry class of the JAR if it contains multiple
+- `"jar_path":string` link to local directory of the existing JAR file
 
 **Response**
 
 - `201 Created` on success
 
 ```json
-{
-    "identifier": "floor-lamp",
-    "name": "Floor Lamp",
-    "device_type": "switch",
-    "controller_gateway": "192.1.68.0.2"
-}
+  {
+    "jobname": "A",
+    "version": 1,
+    "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
+    "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
+    "location": "http://localhost:8081",
+    "mqtt": "tcp://localhost:1883",
+    "source": "T-2",
+    "sink": "T-N",
+    "class": "flinkpackage.FlowCheck"
+  }
 ```
 
-## Lookup device details
+## Lookup jobs details
 
-`GET /device/<identifier>`
+`GET /jobs/<identifier>`
 
 **Response**
 
@@ -80,21 +91,26 @@ If a device with the given identifier already exists, the existing device will b
 - `200 OK` on success
 
 ```json
-{
-    "identifier": "floor-lamp",
-    "name": "Floor Lamp",
-    "device_type": "switch",
-    "controller_gateway": "192.1.68.0.2"
-}
+  {
+    "jobname": "B",
+    "version": 1,
+    "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
+    "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
+    "location": "http://localhost:8081",
+    "mqtt": "tcp://localhost:1883",
+    "source": "T-2",
+    "sink": "T-N",
+    "class": "flinkpackage.FlowCheck"
+  }
 ```
 
-## Delete a device
+## Delete a job
 
 **Definition**
 
-`DELETE /devices/<identifier>`
+`DELETE /jobs/<identifier>`
 
 **Response**
 
-- `404 Not Found` if the device does not exist
+- `404 Not Found` if the job does not exist
 - `204 No Content` on success
