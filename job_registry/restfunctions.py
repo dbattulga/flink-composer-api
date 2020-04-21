@@ -10,11 +10,10 @@ def upload_jar(base_url, jarpath):
     if (upload.ok):
         response = json.loads(upload.content)
         if "filename" in response:
-            #print(response["filename"])
             return get_upload_id(response["filename"])
-    else:
-        upload.raise_for_status()
-        return upload.status_code
+
+    upload.raise_for_status()
+    return upload.status_code
 
 
 # starts job with parameters, successful: returns jobid else "failed"
@@ -35,9 +34,9 @@ def start_jar(base_url, jarid, entryclass, mqttaddr, sourcetopic, sinktopic, job
         if "jobid" in response:
             #print(response["jobid"])
             return response["jobid"]
-    else:
-        start.raise_for_status()
-        return start.status_code
+
+    start.raise_for_status()
+    return start.status_code
 
 #####################################################################################################################
 
@@ -110,9 +109,9 @@ def check_jar_exists(base_url, jarid):
                     return True
                 #print(jar["id"])
             return False
-    else:
-        check.raise_for_status()
-        return check.status_code
+
+    check.raise_for_status()
+    return check.status_code
 
 
 def delete_jar(base_url, jarid):
@@ -131,20 +130,18 @@ def check_job_state(base_url, jobid):
     if (check.ok):
         response = json.loads(check.content)
         if "jobs" in response:
-            #print(response["jobs"])
             for job in response["jobs"]:
-                #print(job["id"] + " is: " + job["status"])
                 if job["id"] == jobid:
                     return job["status"]
-    else:
-        check.raise_for_status()
-        return check.status_code
+
+    check.raise_for_status()
+    return check.status_code
 
 def check_job_status(base_url, jobid):
     check = requests.get(base_url + "/jobs/" + jobid)
     if (check.ok):
         response = json.loads(check.content)
-        print(response)
+        #print(response)
     else:
         check.raise_for_status()
     return check.status_code
@@ -153,7 +150,7 @@ def stop_job(base_url, jobid):
     stop = requests.patch(base_url + "/jobs/" + jobid)
     if (stop.ok):
         response = json.loads(stop.content)
-        print(response)
+        #print(response)
     else:
         stop.raise_for_status()
     return stop.status_code

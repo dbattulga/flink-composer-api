@@ -5,6 +5,7 @@ import logging
 
 from flask import Flask, g
 from flask_restful import Resource, Api, reqparse
+from job_registry import restfunctions
 
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
@@ -35,6 +36,26 @@ def index():
         # Convert to HTML
         return markdown.markdown(content)
 
+
+def add_job(args):
+    jarid = restfunctions.upload_jar(args['flink_address'], args['jar_path'])
+    jobid = restfunctions.start_jar(args['flink_address'], jarid, args['entry_class'], args['mqtt_address'],
+                                    args['source_topic'], args['sink_topic'], args['job_name'])
+
+    key = args['job_name']
+    values = {'jobname': args['job_name'],
+                'version': args['version'],
+                'jarid': jarid,
+                'jobid': jobid,
+                'location': args['flink_address'],
+                'mqtt': args['mqtt_address'],
+                'source': args['source_topic'],
+                'sink': args['sink_topic'],
+                'class': args['entry_class']
+                }
+    return key, values
+
+
 class Jobs(Resource):
     def get(self):
         shelf = get_db()
@@ -57,17 +78,23 @@ class Jobs(Resource):
         parser.add_argument('entry_class', required=True)
         parser.add_argument('jar_path', required=True)
 
-        # Parse the arguments into an object
         args = parser.parse_args()
         shelf = get_db()
         shelf[args['job_name']] = args
-        #print(shelf[args['job_name']])
+        return {'message': 'Device registered', 'data': args}, 201
 
-        klist = list(shelf.keys())
-        app.logger.info(klist)
-
-        return {'message': 'Job registered', 'data': args}, 201
-
+        # # Parse the arguments into an object
+        # args = parser.parse_args()
+        #
+        # # Call Flink REST API to get jobid jarid
+        # key, values = add_job(args)
+        # shelf = get_db()
+        #
+        # # Save it to DB
+        # shelf[key] = values
+        # app.logger.info(key, values)
+        #
+        # return {'message': 'Job registered', 'data': args}, 201
 
 
 class Job(Resource):
