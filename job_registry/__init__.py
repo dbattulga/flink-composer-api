@@ -1,10 +1,12 @@
 import markdown
 import os
 import shelve
+import logging
 
 from flask import Flask, g
 from flask_restful import Resource, Api, reqparse
 
+logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 api = Api(app)
 
@@ -33,7 +35,7 @@ def index():
         # Convert to HTML
         return markdown.markdown(content)
 
-class JobsList(Resource):
+class Jobs(Resource):
     def get(self):
         shelf = get_db()
         keys = list(shelf.keys())
@@ -43,6 +45,8 @@ class JobsList(Resource):
         return {'message': 'Success', 'data': jobs}, 200
 
     def post(self):
+        """shelve can't detect changes in nested mutable objects, re-set the dictionary instead
+        shelve will save overwrite values if key exists"""
         parser = reqparse.RequestParser()
         parser.add_argument('job_name', required=True)
         parser.add_argument('version', required=True)
@@ -57,7 +61,14 @@ class JobsList(Resource):
         args = parser.parse_args()
         shelf = get_db()
         shelf[args['job_name']] = args
+        #print(shelf[args['job_name']])
+
+        klist = list(shelf.keys())
+        app.logger.info(klist)
+
         return {'message': 'Job registered', 'data': args}, 201
+
+
 
 class Job(Resource):
     def get(self, name):
@@ -79,5 +90,5 @@ class Job(Resource):
         del shelf[name]
         return '', 204
 
-api.add_resource(JobsList, '/jobs')
+api.add_resource(Jobs, '/jobs')
 api.add_resource(Job, '/jobs/<string:name>')

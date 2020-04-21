@@ -7,7 +7,7 @@
 **2 endpoints:**
 
 - `/jobs` GET and POST
-- `/jobs/<identifier>` GET and DELETE 
+- `/jobs/<name>` GET and DELETE 
 
 ### List all Jobs
 
@@ -83,7 +83,7 @@
 
 ## Lookup jobs details
 
-`GET /jobs/<identifier>`
+`GET /jobs/<name>`
 
 **Response**
 
@@ -108,7 +108,7 @@
 
 **Definition**
 
-`DELETE /jobs/<identifier>`
+`DELETE /jobs/<name>`
 
 **Response**
 
