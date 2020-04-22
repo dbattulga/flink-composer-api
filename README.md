@@ -29,16 +29,16 @@
 **Example**
 
 ```json
-    {
-      "job_name": "B",
-      "version": "1",
-      "flink_address": "http://localhost:8081",
-      "mqtt_address": "tcp://10.188.166.98:1883",
-      "source_topic": "T-1",
-      "sink_topic": "T-2",
-      "entry_class": "flinkpackage.FlowCheck",
-      "jar_path": "/Users/davaa/flinktest/target/flinktest-1.jar"
-    }
+  {
+    "job_name": "A",
+    "version": "1",
+    "flink_address": "http://localhost:8081",
+    "mqtt_address": "tcp://10.188.166.98:1883",
+    "source_topic": "T-1",
+    "sink_topic": "T-N",
+    "entry_class": "flinkpackage.FlowCheck",
+    "jar_path": "/Users/davaa/flinktest/target/flinktest-1.jar"
+  }
 ```
 
 **Response**
@@ -95,8 +95,6 @@
   }
 ]
 ```
-
-
 
 ## Lookup jobs details
 
