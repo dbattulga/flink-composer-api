@@ -1,6 +1,6 @@
 # Flink Composer API
 
-### Pull the repository and run docker-compose
+### Pull the repository and run docker-compose up -d
 
 ## Usage
 
@@ -8,6 +8,56 @@
 
 - `/jobs` GET and POST
 - `/jobs/<name>` GET and DELETE 
+
+### Register a new job
+
+**Definition**
+
+`POST /jobs`
+
+**Arguments**
+
+- `"job_name":string` unique name for this job
+- `"version":string` job version
+- `"flink_address":string` the IP address of the Flink instance
+- `"mqtt_address":string` the IP address of main MQTT broker
+- `"source_topic":string` subscriber topic of the job
+- `"sink_topic":string` publisher topic of the job
+- `"entry_class":string` entry class of the JAR if it contains multiple
+- `"jar_path":string` link to local directory of the existing JAR file
+
+**Example**
+
+```json
+    {
+      "job_name": "B",
+      "version": "1",
+      "flink_address": "http://localhost:8081",
+      "mqtt_address": "tcp://10.188.166.98:1883",
+      "source_topic": "T-1",
+      "sink_topic": "T-2",
+      "entry_class": "flinkpackage.FlowCheck",
+      "jar_path": "/Users/davaa/flinktest/target/flinktest-1.jar"
+    }
+```
+
+**Response**
+
+- `201 Created` on success
+
+```json
+  {
+    "jobname": "A",
+    "version": 1,
+    "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
+    "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
+    "location": "http://localhost:8081",
+    "mqtt": "tcp://localhost:1883",
+    "source": "T-2",
+    "sink": "T-N",
+    "class": "flinkpackage.FlowCheck"
+  }
+```
 
 ### List all Jobs
 
@@ -46,40 +96,7 @@
 ]
 ```
 
-### Registering a new job
 
-**Definition**
-
-`POST /jobs`
-
-**Arguments**
-
-- `"job_name":string` unique name for this job
-- `"version":string` job version
-- `"flink_address":string` the IP address of the Flink instance
-- `"mqtt_address":string` the IP address of main MQTT broker
-- `"source_topic":string` subscriber topic of the job
-- `"sink_topic":string` publisher topic of the job
-- `"entry_class":string` entry class of the JAR if it contains multiple
-- `"jar_path":string` link to local directory of the existing JAR file
-
-**Response**
-
-- `201 Created` on success
-
-```json
-  {
-    "jobname": "A",
-    "version": 1,
-    "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
-    "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
-    "location": "http://localhost:8081",
-    "mqtt": "tcp://localhost:1883",
-    "source": "T-2",
-    "sink": "T-N",
-    "class": "flinkpackage.FlowCheck"
-  }
-```
 
 ## Lookup jobs details
 
