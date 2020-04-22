@@ -87,7 +87,7 @@
 
 **Response**
 
-- `404 Not Found` if the device does not exist
+- `404 Not Found` if the job does not exist
 - `200 OK` on success
 
 ```json
