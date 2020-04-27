@@ -6,6 +6,7 @@ import logging
 from flask import Flask, g
 from flask_restful import Resource, Api, reqparse
 from job_registry import restfunctions
+from time import sleep
 
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
@@ -78,23 +79,23 @@ class Jobs(Resource):
         parser.add_argument('entry_class', required=True)
         parser.add_argument('jar_path', required=True)
 
-        args = parser.parse_args()
-        shelf = get_db()
-        shelf[args['job_name']] = args
-        return {'message': 'Device registered', 'data': args}, 201
-
-        # # Parse the arguments into an object
         # args = parser.parse_args()
-        #
-        # # Call Flink REST API to get jobid jarid
-        # key, values = add_job(args)
         # shelf = get_db()
-        #
-        # # Save it to DB
-        # shelf[key] = values
-        # app.logger.info(key, values)
-        #
-        # return {'message': 'Job registered', 'data': args}, 201
+        # shelf[args['job_name']] = args
+        # return {'message': 'Device registered', 'data': args}, 201
+
+        # Parse the arguments into an object
+        args = parser.parse_args()
+
+        # Call Flink REST API to get jobid jarid
+        key, values = add_job(args)
+        shelf = get_db()
+
+        # Save it to DB
+        shelf[key] = values
+        app.logger.info(key, values)
+
+        return {'message': 'Job registered', 'data': args}, 201
 
 
 class Job(Resource):

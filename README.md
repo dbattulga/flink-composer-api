@@ -1,5 +1,8 @@
 # Flink Composer API
 
+### Before running, don't forget to start MQTT broker and Flink instances
+`sudo docker run -dit -p 1883:1883 -p 9001:9001 eclipse-mosquitto`
+
 ### Pull the repository and run docker-compose up -d
 
 ## Usage
