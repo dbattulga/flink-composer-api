@@ -1,9 +1,10 @@
 # Flink Composer API
 
 ### Before running, don't forget to start MQTT broker and Flink instances
-`sudo docker run -dit -p 1883:1883 -p 9001:9001 eclipse-mosquitto`
+`docker run -dit -p 1883:1883 -p 9001:9001 eclipse-mosquitto`
 
-### Pull the repository and run docker-compose up -d
+### Pull the repository and run 
+`docker-compose up -d`
 
 ## Usage
 
@@ -35,12 +36,12 @@
   {
     "job_name": "A",
     "version": "1",
-    "flink_address": "http://localhost:8081",
+    "flink_address": "http://10.188.166.98:8081",
     "mqtt_address": "tcp://10.188.166.98:1883",
     "source_topic": "T-1",
     "sink_topic": "T-N",
     "entry_class": "flinkpackage.FlowCheck",
-    "jar_path": "/Users/davaa/flinktest/target/flinktest-1.jar"
+    "jar_path": "/usr/src/app/jars/flinktest-1.jar"
   }
 ```
 
@@ -54,9 +55,9 @@
     "version": 1,
     "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
     "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
-    "location": "http://localhost:8081",
-    "mqtt": "tcp://localhost:1883",
-    "source": "T-2",
+    "location": "http://10.188.166.98:8081",
+    "mqtt": "tcp://10.188.166.98:1883",
+    "source": "T-1",
     "sink": "T-N",
     "class": "flinkpackage.FlowCheck"
   }
@@ -79,19 +80,19 @@
     "version": 1,
     "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
     "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
-    "location": "http://localhost:8081",
-    "mqtt": "tcp://localhost:1883",
+    "location": "http://10.188.166.98:8081",
+    "mqtt": "tcp://10.188.166.98:1883",
     "source": "T-1",
-    "sink": "T-2",
+    "sink": "T-N",
     "class": "flinkpackage.FlowCheck"
   },
   {
     "jobname": "B",
-    "version": 1,
+    "version": 2,
     "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
     "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
-    "location": "http://localhost:8081",
-    "mqtt": "tcp://localhost:1883",
+    "location": "http://10.188.166.98:8081",
+    "mqtt": "tcp://10.188.166.98:1883",
     "source": "T-2",
     "sink": "T-N",
     "class": "flinkpackage.FlowCheck"
@@ -110,13 +111,13 @@
 
 ```json
   {
-    "jobname": "B",
+    "jobname": "A",
     "version": 1,
     "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
     "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
-    "location": "http://localhost:8081",
-    "mqtt": "tcp://localhost:1883",
-    "source": "T-2",
+    "location": "http://10.188.166.98:8081",
+    "mqtt": "tcp://10.188.166.98:1883",
+    "source": "T-1",
     "sink": "T-N",
     "class": "flinkpackage.FlowCheck"
   }

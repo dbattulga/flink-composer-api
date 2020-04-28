@@ -84,16 +84,57 @@ class Jobs(Resource):
         # shelf[args['job_name']] = args
         # return {'message': 'Device registered', 'data': args}, 201
 
+        shelf = get_db()
         # Parse the arguments into an object
         args = parser.parse_args()
+        job = args['job_name']
 
-        # Call Flink REST API to get jobid jarid
-        key, values = add_job(args)
-        shelf = get_db()
-
-        # Save it to DB
-        shelf[key] = values
-        app.logger.info(key, values)
+        if job in shelf:
+            app.logger.info('the job is already running')
+            if args['flink_address'] == shelf[job]['location']:
+                job_status = restfunctions.check_job_state(args['flink_address'], shelf[job]['jobid'])
+                if job_status == 'RUNNING':
+                    if shelf[job]['version'] == args['version']:
+                        # if version is different, something's changed inside java code
+                        if (shelf[job]['mqtt'] != args['mqtt_address'] or
+                                shelf[job]['source'] != args['source_topic'] or
+                                shelf[job]['sink'] != args['sink_topic'] or
+                                shelf[job]['class'] != args['entry_class']):
+                            app.logger.info('start from old jar with new parameters')
+                            restfunctions.stop_job(shelf[job]['location'], shelf[job]['jobid'])
+                            shelf[job]['jobid'] = restfunctions.start_jar(shelf[job]['location'],
+                                                                      shelf[job]['jarid'],
+                                                                      args['entry_class'],
+                                                                      args['mqtt_address'],
+                                                                      args['source_topic'],
+                                                                      args['sink_topic'],
+                                                                      args['job_name'])
+                            shelf[job]['mqtt'] = args['mqtt_address']
+                            shelf[job]['source'] = args['source_topic']
+                            shelf[job]['sink'] = args['sink_topic']
+                            shelf[job]['class'] = args['entry_class']
+                        else:
+                            app.logger.info('nothing is changed for the job')
+                    else:
+                        restfunctions.delete_jar(shelf[job]['location'], shelf[job]['jarid'])
+                        restfunctions.stop_job(shelf[job]['location'], shelf[job]['jobid'])
+                        del shelf[job]
+                        key, values = add_job(args)
+                        shelf[key] = values
+                        app.logger.info('started the job from new jar')
+                else:
+                    app.logger.info('something wrong, check Flink instances')
+            else:
+                restfunctions.delete_jar(shelf[job]['location'], shelf[job]['jarid'])
+                restfunctions.stop_job(shelf[job]['location'], shelf[job]['jobid'])
+                del shelf[job]
+                key, values = add_job(args)
+                shelf[key] = values
+                app.logger.info('job migrated')
+        else:
+            key, values = add_job(args)
+            shelf[key] = values
+            app.logger.info(key, values)
 
         return {'message': 'Job registered', 'data': args}, 201
 
@@ -115,6 +156,8 @@ class Job(Resource):
         if not (name in shelf):
             return {'message': 'Job not found', 'data': {}}, 404
 
+        restfunctions.delete_jar(shelf[name]['location'], shelf[name]['jarid'])
+        restfunctions.stop_job(shelf[name]['location'], shelf[name]['jobid'])
         del shelf[name]
         return '', 204
 
