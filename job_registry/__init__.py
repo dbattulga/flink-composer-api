@@ -6,7 +6,6 @@ import logging
 from flask import Flask, g
 from flask_restful import Resource, Api, reqparse
 from job_registry import restfunctions
-from time import sleep
 
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
@@ -101,18 +100,20 @@ class Jobs(Resource):
                                 shelf[job]['sink'] != args['sink_topic'] or
                                 shelf[job]['class'] != args['entry_class']):
                             app.logger.info('start from old jar with new parameters')
+                            temp = shelf[job]
                             restfunctions.stop_job(shelf[job]['location'], shelf[job]['jobid'])
-                            shelf[job]['jobid'] = restfunctions.start_jar(shelf[job]['location'],
+                            temp['jobid'] = restfunctions.start_jar(shelf[job]['location'],
                                                                       shelf[job]['jarid'],
                                                                       args['entry_class'],
                                                                       args['mqtt_address'],
                                                                       args['source_topic'],
                                                                       args['sink_topic'],
                                                                       args['job_name'])
-                            shelf[job]['mqtt'] = args['mqtt_address']
-                            shelf[job]['source'] = args['source_topic']
-                            shelf[job]['sink'] = args['sink_topic']
-                            shelf[job]['class'] = args['entry_class']
+                            temp['mqtt'] = args['mqtt_address']
+                            temp['source'] = args['source_topic']
+                            temp['sink'] = args['sink_topic']
+                            temp['class'] = args['entry_class']
+                            shelf[job] = temp
                         else:
                             app.logger.info('nothing is changed for the job')
                     else:
@@ -138,6 +139,12 @@ class Jobs(Resource):
 
         return {'message': 'Job registered', 'data': args}, 201
 
+    def delete(self):
+        shelf = get_db()
+        keys = list(shelf.keys())
+        for key in keys:
+            del shelf[key]
+        return {'message': 'All deleted', 'data': {}}, 200
 
 class Job(Resource):
     def get(self, name):
