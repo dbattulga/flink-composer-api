@@ -3,18 +3,9 @@ jobs:
 
   - job_name: A
     version: 1
-    flink_address: http://10.188.166.98:8081
+    flink_address: http://10.188.166.98:9091
     mqtt_address: tcp://10.188.166.98:1883
     source_topic: T-1
     sink_topic: T-2
-    entry_class: flinkpackage.FlowCheck
-    jar_path: /usr/src/app/jars/flinktest-1.jar
-
-  - job_name: C
-    version: 1
-    flink_address: http://10.188.166.98:8081
-    mqtt_address: tcp://10.188.166.98:1883
-    source_topic: T-3
-    sink_topic: T-4
     entry_class: flinkpackage.FlowCheck
     jar_path: /usr/src/app/jars/flinktest-1.jar
