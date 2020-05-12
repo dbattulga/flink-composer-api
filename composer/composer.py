@@ -4,6 +4,14 @@ import requests
 
 base_url = "http://localhost:5000"
 
+'''
+parapide: 172.16.98.xx
+paravance: 172.16.96.xx
+petitprince: 172.16.177.xx
+
+'''
+
+
 def get_jobs(url):
     check = requests.get(url + "/jobs")
     sysjobs = []
