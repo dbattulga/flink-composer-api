@@ -6,6 +6,7 @@ import logging
 from flask import Flask, g
 from flask_restful import Resource, Api, reqparse
 from job_registry import restfunctions
+from visualizer import net_graph
 
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
@@ -35,6 +36,10 @@ def index():
 
         # Convert to HTML
         return markdown.markdown(content)
+
+@app.route("/graph")
+def draw():
+    net_graph.draw_undirected()
 
 
 def add_job(args):
