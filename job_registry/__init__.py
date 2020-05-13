@@ -3,7 +3,7 @@ import os
 import shelve
 import logging
 
-from flask import Flask, g
+from flask import Flask, g, send_file, render_template
 from flask_restful import Resource, Api, reqparse
 from job_registry import restfunctions
 from visualizer import net_graph
@@ -37,9 +37,11 @@ def index():
         # Convert to HTML
         return markdown.markdown(content)
 
-@app.route("/graph")
-def draw():
-    net_graph.draw_undirected()
+
+@app.route('/graph', methods=['GET'])
+def correlation_matrix():
+    obj = net_graph.draw_directed()
+    return send_file(obj, mimetype='image/png')
 
 
 def add_job(args):

@@ -3,8 +3,8 @@ from mqtt import MqttPublishHandler
 import random
 import time
 
-#mqttph = MqttPublishHandler('127.0.0.1', 'data-generator', 'test', 'test') #host, client id, username & password
-mqttph = MqttPublishHandler('172.16.96.43', 'data-generator', 'test', 'test') #host, client id, username & password
+mqttph = MqttPublishHandler('127.0.0.1', 'data-generator', 'test', 'test') #host, client id, username & password
+#mqttph = MqttPublishHandler('172.16.96.43', 'data-generator', 'test', 'test') #host, client id, username & password
 mqttph.connect()
 
 number = 0
