@@ -39,9 +39,10 @@ def index():
 
 
 @app.route('/graph', methods=['GET'])
-def correlation_matrix():
+def draw_graph():
     obj = net_graph.draw_directed()
     return send_file(obj, mimetype='image/png')
+    #return render_template('image.html', image = obj)
 
 
 def add_job(args):
@@ -150,8 +151,13 @@ class Jobs(Resource):
         shelf = get_db()
         keys = list(shelf.keys())
         for key in keys:
+            if not (key in shelf):
+                return {'message': 'Job not found', 'data': {}}, 404
+            restfunctions.delete_jar(shelf[key]['location'], shelf[key]['jarid'])
+            restfunctions.stop_job(shelf[key]['location'], shelf[key]['jobid'])
             del shelf[key]
         return {'message': 'All deleted', 'data': {}}, 200
+
 
 class Job(Resource):
     def get(self, name):

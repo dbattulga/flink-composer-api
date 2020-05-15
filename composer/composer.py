@@ -1,6 +1,7 @@
 import yaml
 import json
 import requests
+import datetime as dt
 
 base_url = "http://localhost:5000"
 
@@ -8,6 +9,7 @@ base_url = "http://localhost:5000"
 parapide: 172.16.98.xx
 paravance: 172.16.96.xx
 petitprince: 172.16.177.xx
+uvb: 172.16.132.xx
 
 '''
 
@@ -25,7 +27,8 @@ def get_jobs(url):
 
 
 def run_conf():
-    with open('userconf.yaml') as f:
+    #with open('userconf.yaml') as f:
+    with open('result.yaml') as f:
         userconf = yaml.load(f)
     sysjobs = get_jobs(base_url)
 
@@ -51,5 +54,8 @@ def run_conf():
             delete = requests.delete(base_url + "/jobs/" + sysjob)
             print(delete.status_code)
 
-run_conf()
 
+n1=dt.datetime.now()
+run_conf()
+n2=dt.datetime.now()
+print(n2-n1)
