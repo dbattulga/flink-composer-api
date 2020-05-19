@@ -2,7 +2,7 @@ import yaml
 import random
 
 
-num_of_jobs = 10
+num_of_jobs = 1
 list_of_versions = [1, 2]
 mqtt_address = 'tcp://172.16.96.51:1883'
 entry_class = 'flinkpackage.FlowCheck'
@@ -36,7 +36,8 @@ def generate_job():
                break
 
 
-     version = random.choice(list_of_versions)
+     #version = random.choice(list_of_versions)
+     version = 1
      flink_address = random.choice(list_of_instances)
      source_topic = random.choice(list_of_topics)
      sink_topic = random.choice(list_of_topics)

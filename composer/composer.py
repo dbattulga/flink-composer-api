@@ -10,6 +10,7 @@ parapide: 172.16.98.xx
 paravance: 172.16.96.xx
 petitprince: 172.16.177.xx
 uvb: 172.16.132.xx
+econome: 172.16.192.xx
 
 '''
 
