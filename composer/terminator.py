@@ -17,10 +17,8 @@ econome: 172.16.192.xx
 base_url = "http://localhost:5000"
 
 def delete_jobs(url):
-    check = requests.delete(url + "/jobs")
-    if (check.ok):
-        response = json.loads(check.content)
-        print("all jobs are removed")
+    delete = requests.delete(url + "/jobs")
+    print(delete.status_code)
 
 
 n1=dt.datetime.now()

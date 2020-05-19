@@ -1,9 +1,9 @@
 jobs:
-- job_name: EQ
+- job_name: S8
   version: 1
-  flink_address: http://172.16.132.6:8081
-  mqtt_address: tcp://172.16.96.51:1883
+  flink_address: http://172.16.192.9:8081
+  mqtt_address: tcp://172.16.177.6:1883
   source_topic: T-1
-  sink_topic: T-N
+  sink_topic: T-1
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
