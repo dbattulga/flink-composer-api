@@ -7,6 +7,7 @@ from flask import Flask, g, send_file, render_template
 from flask_restful import Resource, Api, reqparse
 from job_registry import restfunctions
 from visualizer import net_graph
+from bokeh.embed import components
 
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
@@ -38,11 +39,20 @@ def index():
         return markdown.markdown(content)
 
 
+@app.route('/directed', methods=['GET'])
+def draw_test():
+    shelf = get_db()
+    obj = net_graph.draw_directed(shelf)
+    return send_file(obj, mimetype='image/png')
+
+
 @app.route('/graph', methods=['GET'])
 def draw_graph():
-    obj = net_graph.draw_directed()
-    return send_file(obj, mimetype='image/png')
-    #return render_template('image.html', image = obj)
+    shelf = get_db()
+    plot = net_graph.draw_graph(shelf)
+    script, div = components(plot)
+    return render_template("image.html", script=script, div=div)
+
 
 
 def add_job(args):

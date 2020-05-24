@@ -1,8 +1,20 @@
-<!doctype html>
 <html>
-   <body>
-      <h1>Graph</h1>
-      <p>{{ name }}</p>
-      <img src="{{ image }}"/>
-   </body>
+<head>
+<link
+    href="http://cdn.pydata.org/bokeh/release/bokeh-2.0.2.min.css"
+    rel="stylesheet" type="text/css">
+<link
+    href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-2.0.2.min.css"
+    rel="stylesheet" type="text/css">
+
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-2.0.2.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-2.0.2.min.js"></script>
+
+</head>
+<body>
+
+{{ script|safe }}
+{{ div|safe }}
+
+</body>
 </html>

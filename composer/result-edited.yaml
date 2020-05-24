@@ -32,11 +32,11 @@ jobs:
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: JG
-  version: 2
-  flink_address: http://172.16.192.9:8081
+  version: 1
+  flink_address: http://172.16.132.6:8081
   mqtt_address: tcp://172.16.177.6:1883
-  source_topic: T-14
-  sink_topic: T-70
+  source_topic: T-6
+  sink_topic: T-4
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: 4O
@@ -280,11 +280,11 @@ jobs:
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: RL
-  version: 2
-  flink_address: http://172.16.192.7:8081
+  version: 1
+  flink_address: http://172.16.132.6:8081
   mqtt_address: tcp://172.16.177.6:1883
-  source_topic: T-40
-  sink_topic: T-16
+  source_topic: T-10
+  sink_topic: T-5
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: 9O
@@ -296,11 +296,11 @@ jobs:
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: MI
-  version: 2
-  flink_address: http://172.16.177.9:8081
+  version: 1
+  flink_address: http://172.16.192.7:8081
   mqtt_address: tcp://172.16.177.6:1883
-  source_topic: T-47
-  sink_topic: T-78
+  source_topic: T-6
+  sink_topic: T-3
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: QS
@@ -377,10 +377,10 @@ jobs:
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: 5K
   version: 2
-  flink_address: http://172.16.177.6:8081
+  flink_address: http://172.16.192.7:8081
   mqtt_address: tcp://172.16.177.6:1883
-  source_topic: T-22
-  sink_topic: T-52
+  source_topic: T-2
+  sink_topic: T-7
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: AS
@@ -411,15 +411,15 @@ jobs:
   version: 1
   flink_address: http://172.16.132.8:8081
   mqtt_address: tcp://172.16.177.6:1883
-  source_topic: T-4
-  sink_topic: T-86
+  source_topic: T-10
+  sink_topic: T-9
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: LN
   version: 1
-  flink_address: http://172.16.177.9:8081
+  flink_address: http://172.16.177.6:8081
   mqtt_address: tcp://172.16.177.6:1883
-  source_topic: T-45
+  source_topic: T-1
   sink_topic: T-3
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
@@ -465,18 +465,18 @@ jobs:
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: T3
   version: 2
-  flink_address: http://172.16.177.9:8081
+  flink_address: http://172.16.192.9:8081
   mqtt_address: tcp://172.16.177.6:1883
-  source_topic: T-20
-  sink_topic: T-44
+  source_topic: T-7
+  sink_topic: T-2
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: SI
   version: 2
-  flink_address: http://172.16.177.9:8081
+  flink_address: http://172.16.177.6:8081
   mqtt_address: tcp://172.16.177.6:1883
-  source_topic: T-65
-  sink_topic: T-59
+  source_topic: T-10
+  sink_topic: T-7
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: UJ
@@ -609,10 +609,10 @@ jobs:
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: TE
   version: 2
-  flink_address: http://172.16.132.6:8081
+  flink_address: http://172.16.177.9:8081
   mqtt_address: tcp://172.16.177.6:1883
-  source_topic: T-86
-  sink_topic: T-74
+  source_topic: T-2
+  sink_topic: T-9
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: 8V
@@ -769,10 +769,10 @@ jobs:
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: MM
   version: 2
-  flink_address: http://172.16.132.8:8081
+  flink_address: http://172.16.177.9:8081
   mqtt_address: tcp://172.16.177.6:1883
-  source_topic: T-37
-  sink_topic: T-76
+  source_topic: T-4
+  sink_topic: T-10
   entry_class: flinkpackage.FlowCheck
   jar_path: /usr/src/app/jars/flinktest-1.jar
 - job_name: C8
