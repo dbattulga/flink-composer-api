@@ -3,8 +3,6 @@ import json
 import requests
 import datetime as dt
 
-base_url = "http://localhost:5000"
-
 '''
 parapide: 172.16.98.xx
 paravance: 172.16.96.xx

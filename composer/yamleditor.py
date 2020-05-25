@@ -2,9 +2,9 @@ import yaml
 import random
 
 
-num_of_jobs = 10
+num_of_jobs = 100
 list_of_versions = [1, 2]
-mqtt_address = 'tcp://172.16.177.6:1883'
+mqtt_address = 'tcp://172.16.96.54:1883'
 entry_class = 'flinkpackage.FlowCheck'
 jar_path = '/usr/src/app/jars/flinktest-1.jar'
 
@@ -65,5 +65,6 @@ while True:
 
 dict = {'jobs' :userjobs}
 
-with open('result-edited.yaml', 'w') as yaml_file:
+with open('result.yaml', 'w') as yaml_file:
+#with open('result-edited.yaml', 'w') as yaml_file:
     yaml.dump(dict, yaml_file, default_flow_style=False, sort_keys=False)

@@ -28,8 +28,8 @@ def get_jobs(url):
 
 
 def run_conf():
-    with open('userconf.yaml') as f:
-    #with open('result.yaml') as f:
+    #with open('userconf.yaml') as f:
+    with open('result.yaml') as f:
         userconf = yaml.load(f)
     sysjobs = get_jobs(base_url)
 
