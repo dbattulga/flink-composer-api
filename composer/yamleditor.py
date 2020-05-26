@@ -2,9 +2,9 @@ import yaml
 import random
 
 
-num_of_jobs = 100
+num_of_jobs = 75
 list_of_versions = [1, 2]
-mqtt_address = 'tcp://172.16.98.9:1883'
+mqtt_address = 'tcp://172.16.39.6:1883'
 entry_class = 'flinkpackage.FlowCheck'
 jar_path = '/usr/src/app/jars/flinktest-1.jar'
 
