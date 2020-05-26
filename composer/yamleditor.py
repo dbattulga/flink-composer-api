@@ -2,7 +2,7 @@ import yaml
 import random
 
 
-num_of_jobs = 75
+num_of_jobs = 100
 list_of_versions = [1, 2]
 mqtt_address = 'tcp://172.16.39.6:1883'
 entry_class = 'flinkpackage.FlowCheck'
