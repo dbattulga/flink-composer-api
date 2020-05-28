@@ -3,19 +3,29 @@ jobs:
 
   - job_name: A
     version: 1
-    flink_address: http://10.188.166.98:8081
-    source_mqtt: tcp://10.188.166.98:1883
-    sink_mqtt: tcp://10.188.166.98:1883
+    flink_address: http://172.16.52.22:8081/
+    source_mqtt: tcp://172.16.52.22:1883
+    sink_mqtt: tcp://172.16.52.23:1883
     source_topic: T-1
-    sink_topic: T-2
+    sink_topic: T-1
     entry_class: flinkpackage.FlowCheck
     jar_path: /usr/src/app/jars/flinktest-1.jar
 
   - job_name: B
     version: 1
-    flink_address: http://10.188.166.98:8081
-    source_mqtt: tcp://10.188.166.98:1883
-    sink_mqtt: tcp://10.188.166.98:1883
+    flink_address: http://172.16.52.23:8081/
+    source_mqtt: tcp://172.16.52.23:1883
+    sink_mqtt: tcp://172.16.52.9:1883
+    source_topic: T-1
+    sink_topic: T-1
+    entry_class: flinkpackage.FlowCheck
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: C
+    version: 1
+    flink_address: http://172.16.52.9:8081/
+    source_mqtt: tcp://172.16.52.9:1883
+    sink_mqtt: tcp://172.16.52.9:1883
     source_topic: T-1
     sink_topic: T-2
     entry_class: flinkpackage.FlowCheck
