@@ -1,32 +1,172 @@
 ---
 jobs:
 
-  - job_name: A
+  - job_name: A_OP1_1
     version: 1
-    flink_address: http://172.16.52.22:8081/
-    source_mqtt: tcp://172.16.52.22:1883
-    sink_mqtt: tcp://172.16.52.23:1883
+    flink_address: http://172.16.39.8:8081/
+    source_mqtt: tcp://172.16.39.8:1883
+    sink_mqtt: tcp://172.16.39.8:1883
     source_topic: T-1
-    sink_topic: T-1
-    entry_class: flinkpackage.FlowCheck
+    sink_topic: T-4
+    entry_class: flinkpackage.OperatorOne
     jar_path: /usr/src/app/jars/flinktest-1.jar
 
-  - job_name: B
+  - job_name: A_OP1_2
     version: 1
-    flink_address: http://172.16.52.23:8081/
-    source_mqtt: tcp://172.16.52.23:1883
-    sink_mqtt: tcp://172.16.52.9:1883
-    source_topic: T-1
-    sink_topic: T-1
-    entry_class: flinkpackage.FlowCheck
+    flink_address: http://172.16.39.8:8081/
+    source_mqtt: tcp://172.16.39.8:1883
+    sink_mqtt: tcp://172.16.39.8:1883
+    source_topic: T-2
+    sink_topic: T-4
+    entry_class: flinkpackage.OperatorOne
     jar_path: /usr/src/app/jars/flinktest-1.jar
 
-  - job_name: C
+  - job_name: A_OP1_3
+    version: 1
+    flink_address: http://172.16.39.8:8081/
+    source_mqtt: tcp://172.16.39.8:1883
+    sink_mqtt: tcp://172.16.39.8:1883
+    source_topic: T-3
+    sink_topic: T-4
+    entry_class: flinkpackage.OperatorOne
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: A_OP2
+    version: 1
+    flink_address: http://172.16.39.8:8081/
+    source_mqtt: tcp://172.16.39.8:1883
+    sink_mqtt: tcp://172.16.177.7:1883
+    source_topic: T-4
+    sink_topic: T-N
+    entry_class: flinkpackage.OperatorTwo
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: A_OP3
+    version: 1
+    flink_address: http://172.16.39.8:8081/
+    source_mqtt: tcp://172.16.39.8:1883
+    sink_mqtt: tcp://172.16.39.8:1883
+    source_topic: T-4
+    sink_topic: T-G
+    entry_class: flinkpackage.OperatorThree
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: B_OP1_1
     version: 1
     flink_address: http://172.16.52.9:8081/
     source_mqtt: tcp://172.16.52.9:1883
     sink_mqtt: tcp://172.16.52.9:1883
     source_topic: T-1
-    sink_topic: T-2
-    entry_class: flinkpackage.FlowCheck
+    sink_topic: T-4
+    entry_class: flinkpackage.OperatorOne
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: B_OP1_2
+    version: 1
+    flink_address: http://172.16.52.9:8081/
+    source_mqtt: tcp://172.16.52.9:1883
+    sink_mqtt: tcp://172.16.52.9:1883
+    source_topic: T-2
+    sink_topic: T-4
+    entry_class: flinkpackage.OperatorOne
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: B_OP1_3
+    version: 1
+    flink_address: http://172.16.52.9:8081/
+    source_mqtt: tcp://172.16.52.9:1883
+    sink_mqtt: tcp://172.16.52.9:1883
+    source_topic: T-3
+    sink_topic: T-4
+    entry_class: flinkpackage.OperatorOne
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: B_OP3
+    version: 1
+    flink_address: http://172.16.52.9:8081/
+    source_mqtt: tcp://172.16.52.9:1883
+    sink_mqtt: tcp://172.16.52.9:1883
+    source_topic: T-4
+    sink_topic: T-G
+    entry_class: flinkpackage.OperatorThree
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: B_OP2
+    version: 1
+    flink_address: http://172.16.52.9:8081/
+    source_mqtt: tcp://172.16.52.9:1883
+    sink_mqtt: tcp://172.16.177.7:1883
+    source_topic: T-4
+    sink_topic: T-N
+    entry_class: flinkpackage.OperatorTwo
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: C_OP1_1
+    version: 1
+    flink_address: http://172.16.192.9:8081/
+    source_mqtt: tcp://172.16.192.9:1883
+    sink_mqtt: tcp://172.16.192.9:1883
+    source_topic: T-1
+    sink_topic: T-5
+    entry_class: flinkpackage.OperatorOne
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: C_OP1_2
+    version: 1
+    flink_address: http://172.16.192.9:8081/
+    source_mqtt: tcp://172.16.192.9:1883
+    sink_mqtt: tcp://172.16.192.9:1883
+    source_topic: T-2
+    sink_topic: T-5
+    entry_class: flinkpackage.OperatorOne
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: C_OP1_3
+    version: 1
+    flink_address: http://172.16.192.9:8081/
+    source_mqtt: tcp://172.16.192.9:1883
+    sink_mqtt: tcp://172.16.192.9:1883
+    source_topic: T-3
+    sink_topic: T-5
+    entry_class: flinkpackage.OperatorOne
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: C_OP1_4
+    version: 1
+    flink_address: http://172.16.192.9:8081/
+    source_mqtt: tcp://172.16.192.9:1883
+    sink_mqtt: tcp://172.16.192.9:1883
+    source_topic: T-4
+    sink_topic: T-5
+    entry_class: flinkpackage.OperatorOne
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: C_OP2
+    version: 1
+    flink_address: http://172.16.192.9:8081/
+    source_mqtt: tcp://172.16.192.9:1883
+    sink_mqtt: tcp://172.16.177.7:1883
+    source_topic: T-5
+    sink_topic: T-N
+    entry_class: flinkpackage.OperatorTwo
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: C_OP3
+    version: 1
+    flink_address: http://172.16.192.9:8081/
+    source_mqtt: tcp://172.16.192.9:1883
+    sink_mqtt: tcp://172.16.192.9:1883
+    source_topic: T-5
+    sink_topic: T-G
+    entry_class: flinkpackage.OperatorThree
+    jar_path: /usr/src/app/jars/flinktest-1.jar
+
+  - job_name: D_OP4
+    version: 1
+    flink_address: http://172.16.177.7:8081/
+    source_mqtt: tcp://172.16.177.7:1883
+    sink_mqtt: tcp://172.16.177.7:1883
+    source_topic: T-N
+    sink_topic: T-T
+    entry_class: flinkpackage.OperatorFour
     jar_path: /usr/src/app/jars/flinktest-1.jar
