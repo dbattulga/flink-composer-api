@@ -24,7 +24,8 @@
 - `"job_name":string` unique name for this job
 - `"version":string` job version
 - `"flink_address":string` the IP address of the Flink instance
-- `"mqtt_address":string` the IP address of main MQTT broker
+- `"source_mqtt":string` the IP address of source MQTT broker
+- `"sink_mqtt":string` the IP address of sink MQTT broker
 - `"source_topic":string` subscriber topic of the job
 - `"sink_topic":string` publisher topic of the job
 - `"entry_class":string` entry class of the JAR if it contains multiple
@@ -37,7 +38,8 @@
     "job_name": "A",
     "version": "1",
     "flink_address": "http://10.188.166.98:8081",
-    "mqtt_address": "tcp://10.188.166.98:1883",
+    "source_mqtt": "tcp://10.188.166.98:1883",
+    "sink_mqtt": "tcp://10.188.166.98:1883",
     "source_topic": "T-1",
     "sink_topic": "T-N",
     "entry_class": "flinkpackage.FlowCheck",
@@ -56,9 +58,10 @@
     "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
     "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
     "location": "http://10.188.166.98:8081",
-    "mqtt": "tcp://10.188.166.98:1883",
-    "source": "T-1",
-    "sink": "T-N",
+    "source_mqtt": "tcp://10.188.166.98:1883",
+    "sink_mqtt": "tcp://10.188.166.98:1883",
+    "source_topic": "T-1",
+    "sink_topic": "T-N",
     "class": "flinkpackage.FlowCheck"
   }
 ```
@@ -81,9 +84,10 @@
     "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
     "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
     "location": "http://10.188.166.98:8081",
-    "mqtt": "tcp://10.188.166.98:1883",
-    "source": "T-1",
-    "sink": "T-N",
+    "source_mqtt": "tcp://10.188.166.98:1883",
+    "sink_mqtt": "tcp://10.188.166.98:1883",
+    "source_topic": "T-1",
+    "sink_topic": "T-N",
     "class": "flinkpackage.FlowCheck"
   },
   {
@@ -92,9 +96,10 @@
     "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
     "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
     "location": "http://10.188.166.98:8081",
-    "mqtt": "tcp://10.188.166.98:1883",
-    "source": "T-2",
-    "sink": "T-N",
+    "source_mqtt": "tcp://10.188.166.98:1883",
+    "sink_mqtt": "tcp://10.188.166.98:1883",
+    "source_topic": "T-2",
+    "sink_topic": "T-N",
     "class": "flinkpackage.FlowCheck"
   }
 ]
@@ -116,9 +121,10 @@
     "jarid": "97888c54-1d69-44b7-8586-15ba0ae1b7b3_flinktest-1.jar",
     "jobid": "a5cf9ff2bab498f755f49c144e5044c7",
     "location": "http://10.188.166.98:8081",
-    "mqtt": "tcp://10.188.166.98:1883",
-    "source": "T-1",
-    "sink": "T-N",
+    "source_mqtt": "tcp://10.188.166.98:1883",
+    "sink_mqtt": "tcp://10.188.166.98:1883",
+    "source_topic": "T-1",
+    "sink_topic": "T-N",
     "class": "flinkpackage.FlowCheck"
   }
 ```

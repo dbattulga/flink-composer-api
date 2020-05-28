@@ -28,8 +28,8 @@ def get_jobs(url):
 
 
 def run_conf():
-    #with open('userconf.yaml') as f:
-    with open('result.yaml') as f:
+    with open('userconf.yaml') as f:
+    #with open('result.yaml') as f:
         userconf = yaml.load(f)
     sysjobs = get_jobs(base_url)
 
@@ -40,7 +40,8 @@ def run_conf():
         body = {'job_name': userjob['job_name'],
                   'version': userjob['version'],
                   'flink_address': userjob['flink_address'],
-                  'mqtt_address': userjob['mqtt_address'],
+                  'source_mqtt': userjob['source_mqtt'],
+                  'sink_mqtt': userjob['sink_mqtt'],
                   'source_topic': userjob['source_topic'],
                   'sink_topic': userjob['sink_topic'],
                   'entry_class': userjob['entry_class'],

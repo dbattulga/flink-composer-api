@@ -57,7 +57,7 @@ def draw_graph():
 
 def add_job(args):
     jarid = restfunctions.upload_jar(args['flink_address'], args['jar_path'])
-    jobid = restfunctions.start_jar(args['flink_address'], jarid, args['entry_class'], args['mqtt_address'],
+    jobid = restfunctions.start_jar(args['flink_address'], jarid, args['entry_class'], args['source_mqtt'], args['sink_mqtt'],
                                     args['source_topic'], args['sink_topic'], args['job_name'])
 
     key = args['job_name']
@@ -66,9 +66,10 @@ def add_job(args):
                 'jarid': jarid,
                 'jobid': jobid,
                 'location': args['flink_address'],
-                'mqtt': args['mqtt_address'],
-                'source': args['source_topic'],
-                'sink': args['sink_topic'],
+                'source_mqtt': args['source_mqtt'],
+                'sink_mqtt': args['sink_mqtt'],
+                'source_topic': args['source_topic'],
+                'sink_topic': args['sink_topic'],
                 'class': args['entry_class']
                 }
     return key, values
@@ -90,7 +91,8 @@ class Jobs(Resource):
         parser.add_argument('job_name', required=True)
         parser.add_argument('version', required=True)
         parser.add_argument('flink_address', required=True)
-        parser.add_argument('mqtt_address', required=True)
+        parser.add_argument('source_mqtt', required=True)
+        parser.add_argument('sink_mqtt', required=True)
         parser.add_argument('source_topic', required=True)
         parser.add_argument('sink_topic', required=True)
         parser.add_argument('entry_class', required=True)
@@ -113,9 +115,10 @@ class Jobs(Resource):
                 if job_status == 'RUNNING':
                     if shelf[job]['version'] == args['version']:
                         # if version is different, something's changed inside java code
-                        if (shelf[job]['mqtt'] != args['mqtt_address'] or
-                                shelf[job]['source'] != args['source_topic'] or
-                                shelf[job]['sink'] != args['sink_topic'] or
+                        if (shelf[job]['source_mqtt'] != args['source_mqtt'] or
+                                shelf[job]['sink_mqtt'] != args['sink_mqtt'] or
+                                shelf[job]['source_topic'] != args['source_topic'] or
+                                shelf[job]['sink_topic'] != args['sink_topic'] or
                                 shelf[job]['class'] != args['entry_class']):
                             app.logger.info('start from old jar with new parameters')
                             temp = shelf[job]
@@ -123,13 +126,15 @@ class Jobs(Resource):
                             temp['jobid'] = restfunctions.start_jar(shelf[job]['location'],
                                                                       shelf[job]['jarid'],
                                                                       args['entry_class'],
-                                                                      args['mqtt_address'],
+                                                                      args['source_mqtt'],
+                                                                      args['sink_mqtt'],
                                                                       args['source_topic'],
                                                                       args['sink_topic'],
                                                                       args['job_name'])
-                            temp['mqtt'] = args['mqtt_address']
-                            temp['source'] = args['source_topic']
-                            temp['sink'] = args['sink_topic']
+                            temp['source_mqtt'] = args['source_mqtt']
+                            temp['sink_mqtt'] = args['sink_mqtt']
+                            temp['source_topic'] = args['source_topic']
+                            temp['sink_topic'] = args['sink_topic']
                             temp['class'] = args['entry_class']
                             shelf[job] = temp
                         else:

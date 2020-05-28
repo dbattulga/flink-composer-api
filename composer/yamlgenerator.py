@@ -4,7 +4,8 @@ import random
 
 num_of_jobs = 100
 list_of_versions = [1, 2]
-mqtt_address = 'tcp://172.16.177.6:1883'
+source_mqtt = 'tcp://172.16.177.6:1883'
+sink_mqtt = 'tcp://172.16.177.6:1883'
 entry_class = 'flinkpackage.FlowCheck'
 jar_path = '/usr/src/app/jars/flinktest-1.jar'
 
@@ -44,7 +45,8 @@ def generate_job():
      job = {'job_name': job_name,
           'version': version,
           'flink_address': flink_address,
-          'mqtt_address': mqtt_address,
+          'source_mqtt': source_mqtt,
+          'sink_mqtt': sink_mqtt,
           'source_topic': source_topic,
           'sink_topic': sink_topic,
           'entry_class': entry_class,

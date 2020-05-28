@@ -18,9 +18,10 @@ def draw_graph(shelf):
                 jarid = shelf[key]['jarid'],
                 jobid = shelf[key]['jobid'],
                 location = shelf[key]['location'],
-                mqtt = shelf[key]['mqtt'],
-                source = shelf[key]['source'],
-                sink = shelf[key]['sink'],
+                source_mqtt = shelf[key]['source_mqtt'],
+                sink_mqtt=shelf[key]['sink_mqtt'],
+                source_topic = shelf[key]['source_topic'],
+                sink_topic = shelf[key]['sink_topic'],
                 entry_class = shelf[key]['class']
                )
         jobs = list(shelf.keys())
@@ -36,10 +37,11 @@ def draw_graph(shelf):
     plot = Plot(plot_width=1000, plot_height=800, x_range=Range1d(-1.1, 1.1), y_range=Range1d(-1.1, 1.1))
     plot.title.text = "Job Graph"
     # what to show on hover
-    node_hover_tool = HoverTool(tooltips=[("jobname", "@jobname"), ("version", "@version"), ("location", "@location"), ("mqtt", "@mqtt"),
-                                          ("source topic", "@source"), ("sink topic", "@sink")])
+    node_hover_tool = HoverTool(tooltips=[("jobname", "@jobname"), ("version", "@version"), ("location", "@location"), ("source mqtt", "@source_mqtt"),
+                                          ("sink mqtt", "@sink_mqtt"),
+                                          ("source topic", "@source_topic"), ("sink topic", "@sink_topic")])
 
-    fruits = ['Apples', 'Pears', 'Nectarines', 'Plums', 'Grapes', 'Strawberries']
+    #fruits = ['Apples', 'Pears', 'Nectarines', 'Plums', 'Grapes', 'Strawberries']
 
     # what tools to show on the side
     plot.add_tools(node_hover_tool, BoxZoomTool(), ResetTool(), SaveTool(), PanTool())
@@ -68,9 +70,10 @@ def draw_directed(shelf):
                    jarid=shelf[key]['jarid'],
                    jobid=shelf[key]['jobid'],
                    location=shelf[key]['location'],
-                   mqtt=shelf[key]['mqtt'],
-                   source=shelf[key]['source'],
-                   sink=shelf[key]['sink'],
+                   source_mqtt=shelf[key]['source_mqtt'],
+                   sink_mqtt=shelf[key]['sink_mqtt'],
+                   source_topic=shelf[key]['source_topic'],
+                   sink_topic=shelf[key]['sink_topic'],
                    entry_class=shelf[key]['class']
                    )
         jobs = list(shelf.keys())

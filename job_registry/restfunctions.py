@@ -17,8 +17,8 @@ def upload_jar(base_url, jarpath):
 
 
 # starts job with parameters, successful: returns jobid else "failed"
-def start_jar(base_url, jarid, entryclass, mqttaddr, sourcetopic, sinktopic, jobname):
-    programArgs = "--jobname "+jobname+" --mqttaddr "+mqttaddr+" --sourcetopic "+sourcetopic+" --sinktopic "+sinktopic
+def start_jar(base_url, jarid, entryclass, sourcemqtt, sinkmqtt, sourcetopic, sinktopic, jobname):
+    programArgs = "--jobname "+jobname+" --sourcemqtt "+sourcemqtt+" --sinkmqtt "+sinkmqtt+" --sourcetopic "+sourcetopic+" --sinktopic "+sinktopic
     #allowNonRestoredState = False
     #savepointPath = ""
     propertiess = {
