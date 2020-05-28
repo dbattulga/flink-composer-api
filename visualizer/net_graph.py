@@ -33,11 +33,13 @@ def draw_graph(shelf):
 
 
     # Show with Bokeh
-    plot = Plot(plot_width=1000, plot_height=600, x_range=Range1d(-1.1, 1.1), y_range=Range1d(-1.1, 1.1))
-    plot.title.text = "Job Graph Demonstration"
+    plot = Plot(plot_width=1000, plot_height=800, x_range=Range1d(-1.1, 1.1), y_range=Range1d(-1.1, 1.1))
+    plot.title.text = "Job Graph"
     # what to show on hover
     node_hover_tool = HoverTool(tooltips=[("jobname", "@jobname"), ("version", "@version"), ("location", "@location"), ("mqtt", "@mqtt"),
                                           ("source topic", "@source"), ("sink topic", "@sink")])
+
+    fruits = ['Apples', 'Pears', 'Nectarines', 'Plums', 'Grapes', 'Strawberries']
 
     # what tools to show on the side
     plot.add_tools(node_hover_tool, BoxZoomTool(), ResetTool(), SaveTool(), PanTool())
@@ -48,11 +50,13 @@ def draw_graph(shelf):
     graph_viz.edge_renderer.glyph = MultiLine(line_color=edge_color, line_alpha=0.8, line_width=1)
     # append the graph to plotting
     plot.renderers.append(graph_viz)
+    plot.legend.location = "top_left"
 
     return plot
 
 
 def draw_directed(shelf):
+    #plt.figure(dpi=1200)
     G = nx.DiGraph(directed=True)
     keys = list(shelf.keys())
     labels = {}
@@ -74,7 +78,7 @@ def draw_directed(shelf):
             if shelf[job]['source'] == shelf[key]['sink']:
                 G.add_edge(shelf[key]['jobname'], shelf[job]['jobname'])
 
-    pos = nx.spring_layout(G)
+    pos = nx.spring_layout(G, k=0.15, iterations=20)
 
     instance_list = []
     for key in keys:
@@ -93,6 +97,7 @@ def draw_directed(shelf):
     nx.draw_networkx_edges(G, pos=pos, width=1.0, alpha=0.5)
     nx.draw_networkx_labels(G, pos=pos, labels=labels, font_size=14, alpha=0.8)
     plt.legend(scatterpoints=1)
+
 
     img = io.BytesIO()  # file-like object for the image
     plt.savefig(img)  # save the image to the stream

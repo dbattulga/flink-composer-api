@@ -10,7 +10,7 @@ def f(msg):
 
 mp = MqttSubscriptionHandler("127.0.0.1", "status-checker", "test", "test") #host, client id, username & password
 #mp = MqttSubscriptionHandler("172.16.96.43", "status-checker", "test", "test") #host, client id, username & password
-mp.add_subscription("T-1")
+mp.add_subscription("T-2")
 mp.connect()
 mp.with_on_message_f(f)
 mp.listen()
