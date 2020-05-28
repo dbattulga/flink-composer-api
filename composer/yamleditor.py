@@ -2,7 +2,7 @@ import yaml
 import random
 
 
-num_of_jobs = 1
+num_of_jobs = 100
 list_of_versions = [1, 2]
 source_mqtt = 'tcp://172.16.177.6:1883'
 sink_mqtt = 'tcp://172.16.177.6:1883'
