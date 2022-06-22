@@ -3,7 +3,7 @@ flask-restful==0.3.8
 markdown==3.2.1
 requests==2.23.0
 pandas==1.0.2
-numpy==1.18.4
+numpy==1.22.0
 networkx==2.4
 matplotlib==3.2.1
 bokeh==2.0.2
